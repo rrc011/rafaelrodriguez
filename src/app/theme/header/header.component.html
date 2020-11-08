@@ -20,16 +20,11 @@
 				</button>
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-					<ul class="nav navbar-nav menu_nav justify-content-end">
-						<li class="nav-item active">
-							<a class="nav-link" [routerLink]="['/']">Home</a>
+					<ul class="nav navbar-nav menu_nav justify-content-end" *ngFor="let menu of menus">
+						<li class="nav-item active" *ngIf="!menu.submenus">
+							<a class="nav-link" [routerLink]="[menu.url]">{{ menu.name }}</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" [routerLink]="['/about']">About</a>
-						</li>
-						<li class="nav-item"><a class="nav-link" [routerLink]="['/services']">Services</a></li>
-						<li class="nav-item"><a class="nav-link" [routerLink]="['/portfolio']">Portfolio</a></li>
-						<li class="nav-item submenu dropdown">
+						<li class="nav-item submenu dropdown" *ngIf="menu.submenus">
 							<a
 								href="#"
 								class="nav-link dropdown-toggle"
@@ -37,32 +32,23 @@
 								role="button"
 								aria-haspopup="true"
 								aria-expanded="false"
-								>Pages</a
+								>{{ menu.name }}</a
 							>
 							<ul class="dropdown-menu">
-								<li class="nav-item"><a class="nav-link" href="elements.html">Elements</a></li>
-								<li class="nav-item">
-									<a class="nav-link" href="portfolio-details.html">Portfolio Details</a>
+								<li class="nav-item" *ngFor="let sub of menu.submenus">
+									<a class="nav-link" [routerLink]="[sub.url]">{{ sub.name }}</a>
 								</li>
 							</ul>
 						</li>
-						<li class="nav-item submenu dropdown">
-							<a
-								href="#"
-								class="nav-link dropdown-toggle"
-								data-toggle="dropdown"
-								role="button"
-								aria-haspopup="true"
-								aria-expanded="false"
-								>Blog</a
-							>
-							<ul class="dropdown-menu">
-								<li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
-								<li class="nav-item"><a class="nav-link" href="single-blog.html">Blog Details</a></li>
-							</ul>
-						</li>
-						<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
 					</ul>
+					<button
+						(click)="goToLogin()"
+						type="button"
+						style="margin-left: 2rem"
+						class="mr-2 btn btn-outline-info"
+					>
+						Login
+					</button>
 				</div>
 			</div>
 		</nav>

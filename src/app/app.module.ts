@@ -9,17 +9,21 @@ import {HomeModule} from './features/home/home.module';
 import {AboutModule} from './features/about/about.module';
 import {ServiceModule} from './features/service/service.module';
 import {PortfolioModule} from './features/portfolio/portfolio.module';
+import {AuthModule} from './auth/auth.module';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
 	declarations: [AppComponent],
 	imports: [
 		BrowserModule,
+		RouterModule.forRoot([]),
 		AppRoutingModule,
 		ThemeModule,
 		HomeModule,
 		AboutModule,
 		ServiceModule,
 		PortfolioModule,
+		AuthModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent],
