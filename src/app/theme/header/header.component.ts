@@ -16,7 +16,7 @@ interface IMenu {
 })
 export class HeaderComponent implements OnInit {
 	menus: IMenu[] = [];
-  user:User;
+  user:User = new User();
 	constructor(private router: Router, private authService: AuthenticationService) {}
 
 	ngOnInit() {
@@ -79,6 +79,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.authService.logout()
-    this.user = this.authService.currentUserValue.user
+    this.user = new User();
+    console.log(this.user);
 	}
 }
