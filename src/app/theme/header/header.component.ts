@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import { User } from 'src/app/core/models/user';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
 
 interface IMenu {
 	name: string;
@@ -14,8 +16,8 @@ interface IMenu {
 })
 export class HeaderComponent implements OnInit {
 	menus: IMenu[] = [];
-
-	constructor(private router: Router) {}
+  user:User;
+	constructor(private router: Router, private authService: AuthenticationService) {}
 
 	ngOnInit() {
 		this.menus = [
@@ -67,10 +69,16 @@ export class HeaderComponent implements OnInit {
 				name: 'Contact',
 				url: '/',
 			},
-		];
+    ];
+    this.user = this.authService.currentUserValue.user;
 	}
 
 	goToLogin() {
 		this.router.navigateByUrl('auth', {state: {showHeader: false, showFooter: false}});
+  }
+
+  logout() {
+    this.authService.logout()
+    this.user = this.authService.currentUserValue.user
 	}
 }
