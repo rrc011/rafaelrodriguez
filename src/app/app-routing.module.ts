@@ -18,6 +18,21 @@ const routes: Routes = [
 		path: 'portfolio',
 		loadChildren: () => import('./features/portfolio/portfolio.module').then((m) => m.PortfolioModule),
 	},
+	{
+		path: 'personal-information',
+		loadChildren: () =>
+			import('./features/personal-information/personal-information.module').then(
+				(m) => m.PersonalInformationModule
+			),
+	},
+	{
+		path: 'upload',
+		loadChildren: () => import('./features/upload/upload.module').then((m) => m.UploadModule),
+	},
+	{
+		path: 'skills',
+		loadChildren: () => import('./features/skills/skills.module').then((m) => m.SkillsModule),
+	},
 ];
 
 @NgModule({

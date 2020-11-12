@@ -28,8 +28,8 @@ export class AppComponent {
 		// });
 		this.router.events.subscribe((event) => {
 			if (event instanceof NavigationEnd) {
-				this.showHeader = event.url !== '/auth';
-				this.showFooter = event.url !== '/auth';
+				this.showHeader = !event.url.includes("/auth");
+				this.showFooter = !event.url.includes("/auth");
 			}
 		});
 	}

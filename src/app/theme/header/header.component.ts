@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import { User } from 'src/app/core/models/user';
-import { AuthenticationService } from 'src/app/core/services/authentication.service';
+import {User} from 'src/app/core/models/user';
+import {AuthenticationService} from 'src/app/core/services/authentication.service';
 
 interface IMenu {
 	name: string;
@@ -16,10 +16,15 @@ interface IMenu {
 })
 export class HeaderComponent implements OnInit {
 	menus: IMenu[] = [];
-  user:User = new User();
+	user: User = new User();
 	constructor(private router: Router, private authService: AuthenticationService) {}
 
 	ngOnInit() {
+		this.init();
+	}
+
+	init() {
+		this.user = this.authService.currentUserValue;
 		this.menus = [
 			{
 				name: 'Home',
@@ -30,6 +35,10 @@ export class HeaderComponent implements OnInit {
 				url: '/about',
 			},
 			{
+				name: 'Skills',
+				url: '/skills',
+			},
+			{
 				name: 'Services',
 				url: '/services',
 			},
@@ -38,48 +47,39 @@ export class HeaderComponent implements OnInit {
 				url: '/portfolio',
 			},
 			{
-				name: 'Pages',
-				url: '#',
-				submenus: [
-					{
-						name: 'Elements',
-						url: '#',
-					},
-					{
-						name: 'Portfolio Details',
-						url: '#',
-					},
-				],
-			},
-			{
-				name: 'Blog',
-				url: '#',
-				submenus: [
-					{
-						name: 'Blog',
-						url: '#',
-					},
-					{
-						name: 'Blog details',
-						url: '#',
-					},
-				],
-			},
-			{
 				name: 'Contact',
 				url: '/',
 			},
-    ];
-    this.user = this.authService.currentUserValue.user;
+		];
+		if (this.user) {
+			this.menus.push({
+				name: 'Admin',
+				url: '#',
+				submenus: [
+					{
+						name: 'Personal Information',
+						url: '/personal-information',
+					},
+					{
+						name: 'Upload CV',
+						url: '/upload',
+					},
+					{
+						name: 'Management Skills',
+						url: 'skills/manageSkills',
+					},
+				],
+			});
+		}
 	}
 
 	goToLogin() {
 		this.router.navigateByUrl('auth', {state: {showHeader: false, showFooter: false}});
-  }
+	}
 
-  logout() {
-    this.authService.logout()
-    this.user = new User();
-    console.log(this.user);
+	logout() {
+		this.authService.logout();
+		this.user = new User();
+		this.init();
 	}
 }
