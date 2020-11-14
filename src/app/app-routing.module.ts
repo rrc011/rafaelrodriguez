@@ -33,6 +33,15 @@ const routes: Routes = [
 		path: 'skills',
 		loadChildren: () => import('./features/skills/skills.module').then((m) => m.SkillsModule),
 	},
+	{
+		path: 'contact',
+		loadChildren: () => import('./features/contact/contact.module').then((m) => m.ContactModule),
+	},
+	{
+		path: 'social-media',
+		loadChildren: () =>
+			import('./features/social-media/social-media.module').then((m) => m.SocialMediaModule),
+	},
 ];
 
 @NgModule({

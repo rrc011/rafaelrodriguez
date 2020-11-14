@@ -42,17 +42,17 @@
 						</li>
 					</ul>
 					<button
-            (click)="goToLogin()"
-            *ngIf="!user"
+						(click)="goToLogin()"
+						*ngIf="!user"
 						type="button"
 						style="margin-left: 2rem"
-						class="mr-2 btn btn-outline-info"
+						class="mr-2 primary_btn"
 					>
 						Login
-          </button>
-          <button
-            (click)="logout()"
-            *ngIf="user"
+					</button>
+					<button
+						(click)="logout()"
+						*ngIf="user"
 						type="button"
 						style="margin-left: 2rem"
 						class="mr-2 btn btn-outline-danger"

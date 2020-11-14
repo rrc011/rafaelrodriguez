@@ -48,7 +48,7 @@ export class HeaderComponent implements OnInit {
 			},
 			{
 				name: 'Contact',
-				url: '/',
+				url: '/contact',
 			},
 		];
 		if (this.user) {
@@ -67,6 +67,14 @@ export class HeaderComponent implements OnInit {
 					{
 						name: 'Management Skills',
 						url: 'skills/manageSkills',
+					},
+					{
+						name: 'Management Social Media',
+						url: 'social-media/management-social-media',
+					},
+					{
+						name: 'Management Services',
+						url: 'services/management-service',
 					},
 				],
 			});

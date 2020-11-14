@@ -21,4 +21,13 @@ export class AboutComponent implements OnInit {
 			this.model = r;
 		});
 	}
+
+	getCV() {
+		const linkSource = `data:application/pdf;base64,${this.model.cvPath}`;
+		const downloadLink = document.createElement('a');
+		const fileName = 'CV.pdf';
+		downloadLink.href = linkSource;
+		downloadLink.download = fileName;
+		downloadLink.click();
+	}
 }

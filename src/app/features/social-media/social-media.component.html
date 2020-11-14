@@ -4,7 +4,7 @@
 		<div class="row justify-content-start align-items-center">
 			<div class="col">
 				<div class="row d-flex justify-content-between" style="margin-bottom: 1rem">
-					<h1>Management Skills</h1>
+					<h1>Management Social Media</h1>
 					<button (click)="showModal(undefined)" type="button" class="primary_btn btn-sm">
 						<i class="fa fa-plus-circle" aria-hidden="true"></i> New
 					</button>
@@ -24,14 +24,16 @@
 								<thead>
 									<tr>
 										<th>Name</th>
-										<th>Percent</th>
+										<th>Url</th>
+										<th>Icon Name</th>
 										<th>Options</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr *ngFor="let data of lst">
 										<td>{{ data.name }}</td>
-										<td>{{ data.percent / 100 | percent }}</td>
+										<td>{{ data.url }}</td>
+										<td>{{ data.icon }}</td>
 										<td>
 											<nz-button-group>
 												<button nz-button nzType="primary" (click)="showModal(data)">Edit</button>
@@ -52,14 +54,14 @@
 
 <nz-modal
 	[(nzVisible)]="isVisible"
-	[nzTitle]="model._id ? 'Edit Skill' : 'New Skill'"
+	[nzTitle]="model._id ? 'Edit Social Media' : 'New Social Media'"
 	(nzOnCancel)="handleCancel()"
 	[nzFooter]="modalFooter"
 >
 	<form nz-form [nzLayout]="'vertical'" #form="ngForm">
 		<nz-form-item>
 			<nz-form-label nzFor="name">Name</nz-form-label>
-			<nz-form-control nzErrorTip="Please input skill name!" nzHasFeedback>
+			<nz-form-control nzErrorTip="Please input social media name!" nzHasFeedback>
 				<nz-input-group nzPrefixIcon="edit">
 					<input
 						[(ngModel)]="model.name"
@@ -74,20 +76,35 @@
 			</nz-form-control>
 		</nz-form-item>
 		<nz-form-item>
-			<nz-form-label nzFor="percent">Percentage</nz-form-label>
-			<nz-form-control nzErrorTip="Please input the percentage!" nzHasFeedback>
-				<nz-input-number
-					required
-					name="percent"
-					id="percent"
-					[(ngModel)]="model.percent"
-					[nzMin]="1"
-					[nzMax]="100"
-					[nzStep]="1"
-					[nzFormatter]="formatterPercent"
-					[nzParser]="parserPercent"
-					placeholder="Percentage"
-				></nz-input-number>
+			<nz-form-label nzFor="url">Url</nz-form-label>
+			<nz-form-control nzErrorTip="Please input social media url!" nzHasFeedback>
+				<nz-input-group nzPrefixIcon="edit">
+					<input
+						[(ngModel)]="model.url"
+						required
+						type="text"
+						name="url"
+						id="url"
+						nz-input
+						placeholder="Social media url"
+					/>
+				</nz-input-group>
+			</nz-form-control>
+		</nz-form-item>
+		<nz-form-item>
+			<nz-form-label nzFor="icon">Icon Name</nz-form-label>
+			<nz-form-control nzErrorTip="Please input social media icon!" nzHasFeedback>
+				<nz-input-group nzPrefixIcon="edit">
+					<input
+						[(ngModel)]="model.icon"
+						required
+						type="text"
+						name="icon"
+						id="icon"
+						nz-input
+						placeholder="Social media icon"
+					/>
+				</nz-input-group>
 			</nz-form-control>
 		</nz-form-item>
 	</form>

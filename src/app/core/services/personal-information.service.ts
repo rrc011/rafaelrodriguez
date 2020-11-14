@@ -11,7 +11,7 @@ import {Responses} from '../models/responses';
 @Injectable({
 	providedIn: 'root',
 })
-export class PersonalInformationService extends BaseApiService {
+export class PersonalInformationService extends BaseApiService<PersonalInformation> {
 	constructor(public http: HttpClient) {
 		super(http);
 	}

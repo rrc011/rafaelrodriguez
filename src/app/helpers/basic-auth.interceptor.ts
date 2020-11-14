@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpRequest, HttpHandler, HttpEvent, HttpInterceptor} from '@angular/common/http';
+import {HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {AuthenticationService} from '../core/services/authentication.service';
 import {catchError} from 'rxjs/operators';
@@ -29,7 +29,7 @@ export class BasicAuthInterceptor implements HttpInterceptor {
 		}
 
 		return next.handle(request).pipe(
-			catchError((err) => {
+			catchError((err: HttpErrorResponse) => {
 				const error = err.error.message || 'Ocurrio un error inesperado';
 				if (err.url.includes('download-cv')) {
 					return throwError(error);

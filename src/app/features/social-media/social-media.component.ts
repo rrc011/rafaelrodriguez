@@ -1,32 +1,28 @@
 import {Component, OnInit} from '@angular/core';
 import {NzTableQueryParams} from 'ng-zorro-antd/table';
-import {Skill} from 'src/app/core/models/skill';
+import {SocialMedia} from 'src/app/core/models/social-media';
 import {AlertService} from 'src/app/core/services/alert.service';
 import {AuthenticationService} from 'src/app/core/services/authentication.service';
-import {SkillService} from 'src/app/core/services/skill.service';
+import {SocialMediaService} from 'src/app/core/services/social-media.service';
 
 @Component({
-	selector: 'app-manage-skills',
-	templateUrl: './manage-skills.component.html',
-	styleUrls: ['./manage-skills.component.scss'],
+	selector: 'app-social-media',
+	templateUrl: './social-media.component.html',
+	styleUrls: ['./social-media.component.scss'],
 })
-export class ManageSkillsComponent implements OnInit {
+export class SocialMediaComponent implements OnInit {
 	isVisible = false;
-	formatterPercent = (value: number) => `${value} %`;
-	parserPercent = (value: string) => value.replace(' %', '');
-	model: Skill = new Skill();
-	lst: Skill[] = [];
+	model: SocialMedia = new SocialMedia();
+	lst: SocialMedia[] = [];
 	pageIndex: number = 1;
 	pageSize: number = 10;
 	totalItems: number;
 
 	constructor(
-		private _skillService: SkillService,
+		private _socialMediaService: SocialMediaService,
 		private _alertService: AlertService,
 		private _authService: AuthenticationService
-	) {
-		this.model.percent = 0;
-	}
+	) {}
 
 	ngOnInit() {
 		this.init(undefined);
@@ -37,7 +33,7 @@ export class ManageSkillsComponent implements OnInit {
 			this.pageSize = e.pageSize;
 			this.pageIndex = e.pageIndex;
 		}
-		this._skillService.getAll(this.pageIndex, this.pageSize).then((r) => {
+		this._socialMediaService.getAll(this.pageIndex, this.pageSize).then((r) => {
 			this.lst = r['Items'];
 			this.totalItems = r['TotalCount'];
 		});
@@ -51,8 +47,8 @@ export class ManageSkillsComponent implements OnInit {
 	create() {
 		this._alertService.question(() => {
 			this.model.userId = this._authService.currentUserValue.id;
-			this._skillService.create(this.model).then(() => {
-				this._alertService.success('Skill creado').then(() => {
+			this._socialMediaService.create(this.model).then(() => {
+				this._alertService.success('Social media created').then(() => {
 					this.isVisible = false;
 					this.init(undefined);
 				});
@@ -63,8 +59,8 @@ export class ManageSkillsComponent implements OnInit {
 	update() {
 		this._alertService.question(() => {
 			this.model.userId = this._authService.currentUserValue.id;
-			this._skillService.update(this.model._id, this.model).then(() => {
-				this._alertService.success('Skill actualizado').then(() => {
+			this._socialMediaService.update(this.model._id, this.model).then(() => {
+				this._alertService.success('Social media updated').then(() => {
 					this.isVisible = false;
 					this.init(undefined);
 				});
@@ -74,7 +70,7 @@ export class ManageSkillsComponent implements OnInit {
 
 	delete(id: string) {
 		this._alertService.question(() => {
-			this._skillService.hardDelete(id).then(() => {
+			this._socialMediaService.hardDelete(id).then(() => {
 				this._alertService.success('Registro elminado').then(() => {
 					this.isVisible = false;
 					this.init(undefined);
@@ -83,14 +79,13 @@ export class ManageSkillsComponent implements OnInit {
 		}, 'Estas seguro de eliminar este registro');
 	}
 
-	showModal(editModel: Skill): void {
+	showModal(editModel: SocialMedia): void {
 		if (editModel) this.model = editModel;
 		this.isVisible = true;
 	}
 
 	handleCancel(): void {
 		this.isVisible = false;
-		this.model = new Skill();
-		this.model.percent = 0;
+		this.model = new SocialMedia();
 	}
 }

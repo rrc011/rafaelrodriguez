@@ -8,6 +8,7 @@ import {Login} from '../models/login';
 import {endpoints} from '../constants/endpoints.constants';
 import {User} from '../models/user';
 import {Router} from '@angular/router';
+import {HeaderComponent} from 'src/app/theme/header/header.component';
 
 @Injectable({
 	providedIn: 'root',
@@ -48,11 +49,12 @@ export class AuthenticationService {
 	}
 
 	logout() {
-		// remove user from local storage to log user out
+		const header = new HeaderComponent(this.router, this);
 		localStorage.removeItem('currentUser');
 		localStorage.removeItem('token');
 		this.currentUserSubject.next(null);
 		this.currentTokenSubject.next(null);
+		header.init();
 		this.router.navigateByUrl('/');
 	}
 }

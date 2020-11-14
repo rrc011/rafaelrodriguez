@@ -3,7 +3,7 @@ import {Observable} from 'rxjs';
 import {Observer} from '../core/models/observer';
 import {Responses} from '../core/models/responses';
 
-export class BaseApiService {
+export class BaseApiService<T> {
 	genericError = '';
 	constructor(public http: HttpClient) {
 		this.genericError = `Some Error occcured, Please contact Administrator for the Errors`;
