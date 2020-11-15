@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {PersonalInformation} from 'src/app/core/models/personal-information';
 import {PersonalInformationService} from 'src/app/core/services/personal-information.service';
 
@@ -10,7 +11,7 @@ import {PersonalInformationService} from 'src/app/core/services/personal-informa
 export class HomeComponent implements OnInit {
 	model: PersonalInformation = new PersonalInformation();
 
-	constructor(private _infoService: PersonalInformationService) {}
+	constructor(private _infoService: PersonalInformationService, private _router: Router) {}
 
 	ngOnInit() {
 		this.init();
@@ -29,5 +30,9 @@ export class HomeComponent implements OnInit {
 		downloadLink.href = linkSource;
 		downloadLink.download = fileName;
 		downloadLink.click();
+	}
+
+	goToContactForm() {
+		this._router.navigateByUrl('/contact');
 	}
 }
